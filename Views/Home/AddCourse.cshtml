@@ -1,0 +1,73 @@
+﻿@model LMS.Models.Course
+
+@{
+    ViewData["Title"] = "Add Course";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="container mt-5">
+    <h2>Add Course Info</h2>
+    <form asp-action="AddCourse" method="post">
+        <div class="form-group">
+            <label asp-for="CourseName"></label>
+            <input asp-for="CourseName" class="form-control" />
+            <span asp-validation-for="CourseName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ModuleCount"></label>
+            <input asp-for="ModuleCount" class="form-control" type="number" onchange="showModuleNames(this.value)" />
+            <span asp-validation-for="ModuleCount" class="text-danger"></span>
+        </div>
+        <div id="moduleNamesContainer"></div>
+        <div class="form-group">
+            <label asp-for="FromDate"></label>
+            <input asp-for="FromDate" class="form-control" type="date" />
+            <span asp-validation-for="FromDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ToDate"></label>
+            <input asp-for="ToDate" class="form-control" type="date" />
+            <span asp-validation-for="ToDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="LectureMode"></label>
+            <select asp-for="LectureMode" class="form-control">
+                <option>Online</option>
+                <option>Physical</option>
+            </select>
+            <span asp-validation-for="LectureMode" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Lecturer"></label>
+            <input asp-for="Lecturer" class="form-control" />
+            <span asp-validation-for="Lecturer" class="text-danger"></span>
+        </div>
+
+        <div class="form-group p-5">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-secondary" onclick="clearForm()">Clear</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function showModuleNames(count) {
+            const container = document.getElementById('moduleNamesContainer');
+            container.innerHTML = '';
+            for (let i = 1; i <= count; i++) {
+                const div = document.createElement('div');
+                div.classList.add('form-group');
+                div.innerHTML = `<label>Module ${i}</label><input name="ModuleNames[${i - 1}]" class="form-control" />`;
+                container.appendChild(div);
+            }
+        }
+
+        function clearForm() {
+            document.querySelector('form').reset();
+            document.getElementById('moduleNamesContainer').innerHTML = '';
+        }
+    </script>
+}

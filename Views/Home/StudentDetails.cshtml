@@ -1,0 +1,19 @@
+﻿@model LMS.Models.Student
+
+@{
+    ViewData["Title"] = "Student Details";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">@Model.FirstName @Model.LastName</h5>
+        <p class="card-text"><strong>NIC:</strong> @Model.NIC</p>
+        <p class="card-text"><strong>City:</strong> @Model.City</p>
+        <p class="card-text"><strong>Email:</strong> @Model.Email</p>
+        <p class="card-text"><strong>Telephone:</strong> @Model.Telephone</p>
+        <p class="card-text"><strong>Course Id:</strong> @Model.CourseId</p>
+        <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+    </div>
+</div>
