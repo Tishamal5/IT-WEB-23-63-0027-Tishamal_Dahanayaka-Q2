@@ -1,0 +1,63 @@
+CREATE TABLE Students_B63 (
+    StudentID INT PRIMARY KEY,
+    Sname VARCHAR(255),
+    NIC VARCHAR(20),
+    City VARCHAR(100),
+    CourseID INT,
+    FOREIGN KEY (CourseID) REFERENCES Courses_B63(CourseID)
+);
+
+
+CREATE TABLE Courses_B63 (
+    CourseID INT PRIMARY KEY,
+    Cname VARCHAR(255),
+    LecturerName VARCHAR(255)
+);
+
+
+/*Insert data into the Courses table*/
+
+Insert into Courses_B63(CourseID,Cname,LecturerName) VALUES(1,'WebDevelopment','M.M.Herath');
+Insert into Courses_B63(CourseID,Cname,LecturerName) VALUES(2,'GraphicDesign','J.S.V.Piyasena');
+Insert into Courses_B63(CourseID,Cname,LecturerName) VALUES(3,'Mobile App Development','K.K.S.Dias');
+Insert into Courses_B63(CourseID,Cname,LecturerName) VALUES(4,'Java','U.H.S.Perera');
+
+/*Insert data into the Students table*/
+
+Insert into Students_B63(StudentID,Sname,NIC,City,CourseID) VALUES(1,'Kasun Gamage','200076101831', 'Kandy','2');
+Insert into Students_B63(StudentID,Sname,NIC,City,CourseID) VALUES(2,'Daniel Sam','198876101831', 'Jaffna', '3');
+Insert into Students_B63(StudentID,Sname,NIC,City,CourseID) VALUES(3,'Hansi Silva','199676543466', 'Colombo','1');
+Insert into Students_B63(StudentID,Sname,NIC,City,CourseID) VALUES(4,'Ranindu Herath','198765432345', 'Matara','3');
+Insert into Students_B63(StudentID,Sname,NIC,City,CourseID) VALUES(5,'Praneeth Wijesinghe','199987654567', 'Kandy','4');
+Insert into Students_B63(StudentID,Sname,NIC,City,CourseID) VALUES(6,'Nuwani Herath','2000109876543', 'Rathnapura','1');
+
+/* A)get all the information of all students */
+
+Select * from Students_B63;
+Select * from Courses_B63;
+
+/* B)Select student ID, name and city from students who are from the kamdy*/
+
+Select StudentID ,Sname , City 
+from Students_B63
+where City = 'Kandy';
+
+/*C)Update the city  as Galle of the students whose id equals to 4*/
+
+UPDATE Students_B63 
+SET City = 'Galle'
+Where StudentID = 4;
+
+/* D)Get all the information of all students with their course names*/
+SELECT
+    Students_B63.StudentID,
+    Students_B63.Sname,
+    Students_B63.City,
+    Courses_B63.Cname AS CourseName
+FROM
+    Students_B63
+JOIN
+    Courses_B63 ON Students_B63.CourseID = Courses_B63.CourseID;
+
+
+
